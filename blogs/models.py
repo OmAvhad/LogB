@@ -4,10 +4,16 @@ from datetime import datetime
 
 
 # Create your models here.
+class Categories(models.Model):
+    name = models.CharField(max_length=50,null=False,blank=False)
+    discription = models.CharField(max_length=255,null=True,blank=True)
+    
+
 class Blogs(models.Model):
     title = models.CharField(max_length=255, blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField(blank=True, null=True)
+    category = models.ForeignKey(Categories,null=True,blank=True,on_delete=models.CASCADE)
     is_published = models.BooleanField(default=False)
     published_at = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(default=datetime.now(), blank=None, null=None)
