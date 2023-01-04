@@ -34,10 +34,23 @@ def serializeBlogs(queryset):
         temp['title'] = blog.title
         temp['author'] = blog.author.username
         temp['content'] = blog.content
+        temp['category_id'] = blog.category.id
+        temp['category_name'] = blog.category.name
         temp['is_published'] = blog.is_published
         temp['published_at'] = blog.published_at
         temp['created_at'] = blog.created_at
         temp['updated_at'] = blog.updated_at
         data.append(temp)
     
+    return data
+
+def serializeCategories(queryset):
+    data = []
+    for cat in queryset:
+        temp = {}
+        temp['id'] = cat.id
+        temp['name'] = cat.name
+        temp['discription'] = cat.discription
+        data.append(temp)
+        
     return data

@@ -7,4 +7,5 @@ urlpatterns = [
     path('api/create/blog/',views.createBlog,name="create_blog"),
     path('api/publish/blog/',views.publishBlog,name="get_my_blogs"),
     path('api/get/myblogs/',views.getMyBlogs,name="get_my_blogs"),
+    path('api/get/categories/',views.getAllCategories,name="get_all_categories")
 ]

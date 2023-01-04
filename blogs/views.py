@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from .models import Blogs
+from .models import Blogs, Categories, Comments, Likes
 from django.http import JsonResponse
 from main.views import Response
 from django.contrib.auth.models import User
-from .operations import validateBlogCreation, serializeBlogs, userExists, blogExists
+from .operations import validateBlogCreation, serializeBlogs, userExists, blogExists, serializeCategories
 from datetime import datetime
 # Create your views here.
 
@@ -87,3 +87,11 @@ def publishBlog(request):
         else:
             message = "Send required details"
     return JsonResponse(Response(status=status,status_code=status_code,message=message))
+
+
+@csrf_exempt
+def getAllCategories(request):
+    if request.method == "GET":
+        cat = Categories.objects.all()
+        data = serializeCategories(cat)
+        return JsonResponse(Response(status="success",status_code=200,data=data))

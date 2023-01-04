@@ -4,3 +4,4 @@ from . import models
 admin.site.register(models.Blogs)
 admin.site.register(models.Comments)
 admin.site.register(models.Likes)
+admin.site.register(models.Categories)
