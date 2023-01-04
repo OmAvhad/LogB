@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -6,14 +7,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
     <!-- Bootstrap CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-    <!-- <link rel="stylesheet" href="/Quiz/css/home.css"> -->
+
     <title>Login</title>
 </head>
-
+<script src="{% static 'js/home.js' %}"></script>
 <style>
     * {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -30,7 +35,7 @@
         position: relative;
         display: flex;
         flex-direction: row;
-        height: 650px;
+        height: 1000px;
         width: 25%;
         /* margin: 60px auto; */
 
@@ -41,7 +46,7 @@
         position: absolute;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        /* justify-content: center; */
         flex-wrap: wrap;
         text-align: center;
         height: 100%;
@@ -117,10 +122,12 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><b>
-                    <font color="#16a085">LOG </font>
-                    <font size="6" color="#5A6EA5"> B </font>
+
+            <a class="navbar-brand" style="font-size: 0px" href="/"><b>
+                    <font size="5" color="#16a085" style="display: inline-block">LOG </font>
+                    <font size="6" color="#5A6EA5" style="display: inline-block"> B </font>
                 </b></a> &nbsp &nbsp
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -165,24 +172,36 @@
     <center>
         <div id="container">
             <br>
-            <form action="/" method="post">
+            <form class="form-group" action="/" method="post" id="register_form">
                 <i class="fas fa-user-circle"></i>
                 <h2>Register</h2>
                 <br>
                 <br>
-                <input type="name" id="first_name" name="first_name" aria-describedby="first_name" placeholder="First Name" required>
+                <input type="name" id="first_name" name="first_name" aria-describedby="first_name"
+                    placeholder="First Name" readonly onfocus="this.removeAttribute('readonly');">
+                <h6 align="left" id="first_name_check"></h6>
                 <br>
-                <input type="name" id="last_name" name="last_name" aria-describedby="last_name" placeholder="Last Name" required>
+                <input type="name" id="last_name" name="last_name" aria-describedby="last_name" placeholder="Last Name"
+                    readonly onfocus="this.removeAttribute('readonly');">
+                <h6 align="left" id="last_name_check"></h6>
                 <br>
-                <input type="username" id="username" name="username" aria-describedby="username" placeholder="Username" required>
+                <input readonly onfocus="this.removeAttribute('readonly');" type="username" id="username"
+                    name="username" placeholder="Username">
+                <h6 align="left" id="username_check"></h6>
                 <br>
-                <input type="email" id="email" name="email" aria-describedby="email" placeholder="Email" required>
+                <input type="email" id="email" name="email" aria-describedby="email" placeholder="Email" readonly
+                    onfocus="this.removeAttribute('readonly');" required>
+                <h6 align="left" id="email_check"></h6>
                 <br>
-                <input type="password" id="password" name="password" placeholder="Password" required>
+                <input type="password" id="password" name="password" placeholder="Password" readonly
+                    onfocus="this.removeAttribute('readonly');">
+                <h6 align="left" id="password_check"></h6>
                 <br>
-                <input type="password" id="cpassword" name="cpassword" placeholder="Comfirm Password" required>
+                <input type="password" id="cpassword" name="cpassword" placeholder="Comfirm Password" readonly
+                    onfocus="this.removeAttribute('readonly');">
+                <h6 align="left" id="cpassword_check"></h6>
                 <br>
-                <button type="submit">Register</button>
+                <button id="submitbtn" type="submit">Register</button>
             </form>
             <br>
             <br>
@@ -195,21 +214,195 @@
 
             console.log('hello');
         });
+
+
+        $(document).ready(function () {
+            $('#first_name_check').hide();
+            $('#last_name_check').hide();
+            $('#username_check').hide();
+            $('#email_check').hide();
+            $('#password_check').hide();
+            $('#cpassword_check').hide();
+
+            var first_name_err = true;
+            var last_name_err = true;
+            var username_err = true;
+            var email_err = true;
+            var password_err = true;
+            var cpassword_err = true;
+
+            $('#first_name').keyup(function () {
+                first_name_check();
+            })
+            $('#last_name').keyup(function () {
+                last_name_check();
+            })
+            $('#username').keyup(function () {
+                username_check();
+            })
+            $('#email').keyup(function () {
+                email_check();
+            })
+            $('#password').keyup(function () {
+                password_check();
+            })
+            $('#cpassword').keyup(function () {
+                cpassword_check();
+            })
+
+
+
+            function first_name_check() {
+                var first_name_value = $('#first_name').val();
+                if (first_name_value.length == '') {
+                    $('#first_name_check').show();
+                    $('#first_name_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your first name.");
+                    $('#first_name_check').focus();
+                    $('#first_name_check').css("color", "#ce4f48");
+                    $('#first_name_check').css("align", "left");
+                    first_name_err = false;
+                    return false;
+                }
+                else {
+                    $('#first_name_check').hide();
+                }
+            }
+            function last_name_check() {
+                var last_name_value = $('#last_name').val();
+                if (last_name_value.length == '') {
+                    $('#last_name_check').show();
+                    $('#last_name_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your last name.");
+                    $('#last_name_check').focus();
+                    $('#last_name_check').css("color", "#ce4f48");
+                    last_name_err = false;
+                    return false;
+                }
+                else {
+                    $('#last_name_check').hide();
+                }
+            }
+            function username_check() {
+                var username_value = $('#username').val();
+                if (username_value.length == '') {
+                    $('#username_check').show();
+                    $('#username_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your username.");
+                    $('#username_check').focus();
+                    $('#username_check').css("color", "#ce4f48");
+                    username_err = false;
+                    return false;
+                }
+                else {
+                    $('#username_check').hide();
+                }
+            }
+            function email_check() {
+                var email_value = $('#email').val();
+                if (email_value.length == '') {
+                    $('#email_check').show();
+                    $('#email_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your email address.");
+                    $('#email_check').focus();
+                    $('#email_check').css("color", "#ce4f48");
+                    email_err = false;
+                    return false;
+                }
+                else {
+                    $('#email_check').hide();
+                }
+            }
+            function password_check() {
+                var password_value = $('#password').val();
+                if (password_value.length == '') {
+                    $('#password_check').show();
+                    $('#password_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your password.");
+                    $('#password_check').focus();
+                    $('#password_check').css("color", "#ce4f48");
+                    password_err = false;
+                    return false;
+                }
+                else {
+                    $('#password_check').hide();
+                }
+            }
+            function cpassword_check() {
+                var cpassword_value = $('#cpassword').val();
+                var password_typed_value = $('#password').val();
+                if (cpassword_value.length == '') {
+                    $('#cpassword_check').show();
+                    $('#cpassword_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please repeat your password");
+                    $('#cpassword_check').focus();
+                    $('#cpassword_check').css("color", "#ce4f48");
+                    cpassword_err = false;
+                    return false;
+                }
+                else if (cpassword_value != password_typed_value) {
+                    $('#cpassword_check').show();
+                    $('#cpassword_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password does not match");
+                    $('#cpassword_check').focus();
+                    $('#cpassword_check').css("color", "#ce4f48");
+                    cpassword_err = false;
+                    return false;
+                }
+                else if (cpassword_value == password_typed_value) {
+                    $('#cpassword_check').show();
+                    $('#cpassword_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password matched");
+                    $('#cpassword_check').focus();
+                    $('#cpassword_check').css("color", "#16a085");
+                    cpassword_err = true;
+                    return true;
+                }
+                else {
+                    $('#cpassword_check').hide();
+                }
+            }
+
+            $('#submitbtn').click(function () {
+                first_name_err = true;
+                last_name_err = true;
+                username_err = true;
+                email_err = true;
+                password_err = true;
+                cpassword_err = true;
+
+                first_name_check();
+                last_name_check();
+                username_check();
+                email_check();
+                password_check();
+                cpassword_check();
+
+                if ((first_name_err == true) && (last_name_err == true) && (username_err == true) && (email_err == true) && (password_err == true) && (cpassword_err == true)) {
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            });
+
+        });
+
+
+
     </script>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-        </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
-    <br><br><br><br><br>
 </body>
 
 </html>
