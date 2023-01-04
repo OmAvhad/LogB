@@ -1,195 +1,149 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Blogs</title>
     <script src="https://unpkg.com/feather-icons"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  
-  
-<style>
-  * {
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
-  
-  html,
-  body {
-      padding: 0px;
-      margin: 0px;
-      background-color: #ecf0f1;
-  }
-  
-  #container {
-      position: relative;
-      display: flex;
-      flex-direction: row;
-      height: 480px;
-      width: 100px;
-      /* margin: 60px auto; */
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
-  }
-  
-  
-  #container form {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      flex-wrap: wrap;
-      text-align: center;
-      height: 100%;
-      width: 350%;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      background-color: #2c3e50;
-  }
-  
-  #container form :first-child {
-      font-size: 100px;
-      color: #16a085;
-      align-items: center;
-  }
-  
-  #container form :nth-child(2) {
-      font-size: 24px;
-      color: #fff;
-  }
-  
-  #container input {
-      border: 0px solid;
-      outline-width: 0px;
-      width: 300px;
-      height: 40px;
-      margin-left: 26px;
-      font-size: 18px;
-      font-weight: 600;
-      background-color: #34495e;
-      color: #fff;
-      padding-left: 10px;
-      border-bottom: 2px solid transparent;
-      transition: all .3s ease;
-  }
-  
-   ::placeholder {
-      font-size: 18px;
-      color: #bdc3c7;
-  }
-  
-  #container button {
-      border: 0px;
-      width: 300px;
-      height: 40px;
-      margin-left: 26px;
-      font-size: 18px;
-      font-weight: 600;
-      background-color: #16a085;
-      color: #fff;
-      cursor: pointer;
-      transition: all .3s ease;
-  }
-  /*Hover effect*/
-  
-  #container button:hover {
-      background-color: #ce4f48;
-  }
-  
-  #container input:focus {
-      border-bottom: 2px solid #16a085;
-  }
-  /*Media Query*/
-  
-  @media screen and (max-width: 1100px) {
-      #container {
-          height: 480px;
-          width: 400px;
-      }
-      #container form {
-          height: 100%;
-          width: 100%;
-      }
-      #container button {
-          margin-left: 84px;
-      }
-      #container input {
-          margin-left: 78px;
-      }
-  }
-  /*the same thing but maw width is 800px*/
-  
-  @media screen and (max-width: 800px) {
-      #container {
-          height: 480px;
-          width: 400px;
-      }
-      #container img {
-          visibility: hidden;
-      }
-      #container form {
-          height: 100%;
-          width: 100%;
-      }
-      #container input {
-          margin-left: 78px;
-      }
-      #container button {
-          margin-left: 84px;
-      }
-  }
-</style>
 
-  
-  </head>
-  <body>
-    
+    <style>
+        * {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        html,
+        body {
+            padding: 0px;
+            margin: 0px;
+            background-color: #ecf0f1;
+        }
+        .content {
+            width: 1200px;
+            height: auto;
+            margin: auto;
+            color: #fff;
+            position: relative;
+        }
+
+        .content .par {
+            padding-left: 20px;
+            padding-bottom: 25px;
+            font-family: Arial;
+            letter-spacing: 1.2px;
+            line-height: 30px;
+        }
+
+        .content h1 {
+            font-family: 'Times New Roman';
+            font-size: 50px;
+            padding-left: 20px;
+            margin-top: 9%;
+            letter-spacing: 2px;
+        }
+
+        .content .cn {
+            width: 160px;
+            height: 40px;
+            background: #ff7200;
+            border: none;
+            margin-bottom: 10px;
+            margin-left: 20px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: .4s ease;
+
+        }
+
+        .content .cn a {
+            text-decoration: none;
+            color: #000;
+            transition: .3s ease;
+        }
+
+        .cn:hover {
+            background-color: #5A6EA5;
+        }
+
+        .welcome_img {
+            position: absolute;
+            top: -120px;
+            left: 770px;
+            transform: translate(0%, -5%);
+            border-radius: 10px;
+            padding: 25px;
+        }
+    </style>
+
+
+</head>
+
+<body class="bg-dark">
+
 
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-          <a class="navbar-brand" href="/"><b>
-                  <font color="#16a085">LOG </font>
-                  <font size="6" color="#5A6EA5"> B</font>
-              </b></a> &nbsp &nbsp
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-              aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><b>
+                    <font color="#16a085">LOG</font>
+                    <font size="6" color="#5A6EA5">B</font>
+                </b></a> &nbsp &nbsp
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
 
-                  <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="/"><b><button
-                                  type="button" class="btn btn-success">Home</button></b></a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="/"><button type="button"
-                              class="btn btn-dark">Blog</button></a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="/"><button type="button"
-                              class="btn btn-dark">My Blogs</button></a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="/"><button type="button"
-                              class="btn btn-dark">About</button></a>
-                  </li>
-                  
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/"><b><button type="button"
+                                    class="btn btn-success">Home</button></b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><button type="button" class="btn btn-dark">Blog</button></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><button type="button" class="btn btn-dark">My Blogs</button></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><button type="button" class="btn btn-dark">About</button></a>
+                    </li>
 
-              </ul>
+
+                </ul>
 
 
 
-              <a href="{% url 'main:login'%}" class="d-flex">
-                  <button class="btn btn-outline-warning" type="submit"><i data-feather="log-in"></i>
-                      <font size="2"><b> Login</b></font>
-                  </button>
-              </a>
-          </div>
-      </div>
-  </nav>
+                <a href="{% url 'main:login'%}" class="nav-link active">
+                    <button class="btn btn-outline-warning" type="submit"><i data-feather="user"></i>
+                        <font size="2"><b>Register / Login</b></font>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div class="content text-white">
+        <h1>A blog that people will <br> actually want to read.</h1>
+        <p class="par">
+            People use Bulletin to share big ideas with the worlds on a <br> regular basis with a focus on accessibility
+            and usability.
+        </p>
+        <button class="cn"><a href="{% url 'main:login'%}"> JOIN US</a></button>
+        <div class="welcome_img">
+            <img src="{% static 'img/welcome.webp' %}" alt="">
+        </div>
+        <br><br><br><br>
+    </div>
 
 
 
@@ -199,10 +153,17 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
     <script>
-      feather.replace()
-      </script>
-  
-  </body>
+        feather.replace()
+    </script>
+
+</body>
+
 </html>
