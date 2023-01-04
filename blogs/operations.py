@@ -1,17 +1,24 @@
 from django.contrib.auth.models import User
+from .models import Blogs
 
-def userExsits(id):
+def userExists(id):
     try:
         user = User.objects.get(id=id)
         return True
     except:
-        user = None
         return False
         
+def blogExists(id):        
+    try:
+        blog = Blogs.objects.get(id=id)
+        return True
+    except:
+        return False
+
 def validateBlogCreation(postdata):
     bool = False
     if "title" and "content" and "author_id" in postdata:
-        if userExsits(postdata['author_id']):
+        if userExists(postdata['author_id']):
             bool = True
             message = "Successful"
         else:
