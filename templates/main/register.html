@@ -28,14 +28,15 @@
     body {
         padding: 0px;
         margin: 0px;
-        background-color: #ecf0f1;
+        height: 800px;
+        background-color: dark;
     }
 
     #container {
         position: relative;
         display: flex;
         flex-direction: row;
-        height: 700px;
+        /* height: 800px; */
         width: 25%;
         /* margin: 60px auto; */
 
@@ -43,23 +44,23 @@
 
 
     #container form {
-        position: absolute;
+        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
         flex-wrap: wrap;
-        text-align: center;
-        height: 100%;
+        /* text-align: center; */
+        /* height: 100%; */
         /* width: 350%; */
-        left: 0;
+        /* left: 0;
         top: 0;
-        bottom: 0;
+        bottom: 0; */
     }
 
     #container form :first-child {
         font-size: 100px;
         color: #ce4f48;
-        align-items: center;
+        /* align-items: center; */
     }
 
     #container form :nth-child(2) {
@@ -219,6 +220,7 @@
             </form>
             
         </div>
+        <br>
         <div class="signin_link">
             Are you a member? <a href="{% url 'main:login'%}">Sign in</a>
         </div>
