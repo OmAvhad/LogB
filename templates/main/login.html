@@ -5,7 +5,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <!-- jQuery  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+    integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -41,7 +44,7 @@
         position: absolute;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        /* justify-content: center; */
         flex-wrap: wrap;
         text-align: center;
         height: 100%;
@@ -183,11 +186,15 @@
                 <h2>Login</h2>
                 <br>
                 <br>
-                <input type="email" id="email" name="email" aria-describedby="email" placeholder="Email" required>
+                <input type="email" id="email" name="email" aria-describedby="email" placeholder="Email" readonly
+                onfocus="this.removeAttribute('readonly');">
+                <h6 align="left" id="email_check"></h6>
                 <br>
-                <input type="password" id="password" name="password" placeholder="Password" required>
+                <input type="password" id="login_password" name="login_password" placeholder="Password" readonly
+                onfocus="this.removeAttribute('readonly');">
+                <h6 align="left" id="login_password_check"></h6>
                 <br>
-                <button type="submit">Login</button>
+                <button id="loginsubmitbtn" type="submit">Login</button>
 
             </form>
            
@@ -203,10 +210,78 @@
 
             console.log('hello');
         });
+
+        $(document).ready(function () {
+            $('#email_check').hide();
+            $('#login_password_check').hide();
+
+
+            var email_err = true;
+            var login_password_err = true;
+
+
+            $('#email').keyup(function () {
+                email_check();
+            })
+            $('#login_password').keyup(function () {
+                login_password_check();
+            })
+            
+
+
+            function email_check() {
+                var email_value = $('#email').val();
+                if (email_value.length == '') {
+                    $('#email_check').show();
+                    $('#email_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your email name.");
+                    $('#email_check').focus();
+                    $('#email_check').css("color", "#ce4f48");
+                    $('#email_check').css("align", "left");
+                    email_err = false;
+                    return false;
+                }
+                else {
+                    $('#email_check').hide();
+                }
+            }
+            function login_password_check() {
+                var login_password_value = $('#login_password').val();
+                if (login_password_value.length == '') {
+                    $('#login_password_check').show();
+                    $('#login_password_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your password.");
+                    $('#login_password_check').focus();
+                    $('#login_password_check').css("color", "#ce4f48");
+                    login_password_err = false;
+                    return false;
+                }
+                else {
+                    $('#login_password_check').hide();
+                }
+            }
+        
+
+            $('#loginsubmitbtn').click(function () {
+                email_err = true;
+                login_password_err = true;
+
+                email_check();
+                login_password_check();
+                
+                if ((email_err == true) && (login_password_err == true)) {
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            });
+
+        });
+
+
     </script>
 
     <!-- Optional JavaScript; choose one of the two! -->
-
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
