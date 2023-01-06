@@ -28,14 +28,15 @@
     body {
         padding: 0px;
         margin: 0px;
-        background-color: #ecf0f1;
+        height: 800px;
+        background-color: dark;
     }
 
     #container {
         position: relative;
         display: flex;
         flex-direction: row;
-        height: 1000px;
+        /* height: 800px; */
         width: 25%;
         /* margin: 60px auto; */
 
@@ -43,23 +44,23 @@
 
 
     #container form {
-        position: absolute;
+        position: relative;
         display: flex;
         flex-direction: column;
-        /* justify-content: center; */
+        justify-content: center;
         flex-wrap: wrap;
-        text-align: center;
-        height: 100%;
+        /* text-align: center; */
+        /* height: 100%; */
         /* width: 350%; */
-        left: 0;
+        /* left: 0;
         top: 0;
-        bottom: 0;
+        bottom: 0; */
     }
 
     #container form :first-child {
         font-size: 100px;
         color: #ce4f48;
-        align-items: center;
+        /* align-items: center; */
     }
 
     #container form :nth-child(2) {
@@ -110,7 +111,20 @@
         border-bottom: 2px solid #ce4f48;
     }
 
-    /*Media Query*/
+    .signin_link{
+        margin: 13px 0;
+        text-align: center;
+        font-size: 16px;
+        color: #ffffff;
+        
+    }
+    .signin_link a{
+        color: #16a085;
+        text-decoration: none;
+    }
+    .signin_link a:hover{
+        color: #5A6EA5;
+    }
 </style>
 
 
@@ -202,10 +216,16 @@
                 <h6 align="left" id="cpassword_check"></h6>
                 <br>
                 <button id="submitbtn" type="submit">Register</button>
+            
             </form>
-            <br>
-            <br>
+            
         </div>
+        <br>
+        <div class="signin_link">
+            Are you a member? <a href="{% url 'main:login'%}">Sign in</a>
+        </div>
+        <br><br><br>
+        
     </center>
 
 
@@ -310,10 +330,69 @@
                 }
             }
             function password_check() {
+                first_name_value = $('#first_name').val();
+                last_name_value = $('#last_name').val();
+                username_value = $('#username').val();
                 var password_value = $('#password').val();
+
+                if (password_value.includes("@")) {
+                    var password_array = password_value.split("@");
+                }
+                else if (password_value.includes(".")) {
+                    var password_array = password_value.split(".");
+                }
+                else if (password_value.includes(" ")) {
+                    var password_array = password_value.split(" ");
+                }
+                else if (password_value.includes("_")) {
+                    var password_array = password_value.split("_");
+                }
+                
+                var personal_info = first_name_value + last_name_value + username_value;
+                console.log(personal_info);
                 if (password_value.length == '') {
                     $('#password_check').show();
                     $('#password_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your password.");
+                    $('#password_check').focus();
+                    $('#password_check').css("color", "#ce4f48");
+                    password_err = false;
+                    return false;
+                }
+                else if (first_name_value.length == '') {
+                    $('#password_check').show();
+                    $('#password_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your first name first.");
+                    $('#password_check').focus();
+                    $('#password_check').css("color", "#ce4f48");
+                    password_err = false;
+                    return false;
+                }
+                else if (last_name_value.length == '') {
+                    $('#password_check').show();
+                    $('#password_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your last name first.");
+                    $('#password_check').focus();
+                    $('#password_check').css("color", "#ce4f48");
+                    password_err = false;
+                    return false;
+                }
+                else if (username_value.length == '') {
+                    $('#password_check').show();
+                    $('#password_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your username first.");
+                    $('#password_check').focus();
+                    $('#password_check').css("color", "#ce4f48");
+                    password_err = false;
+                    return false;
+                }
+                else if (password_value.length < 9) {
+                    $('#password_check').show();
+                    $('#password_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Password must contain atleast 8 <br>&nbsp;&nbsp;&nbsp;&nbsp; characters.");
+                    $('#password_check').focus();
+                    $('#password_check').css("color", "#ce4f48");
+                    password_err = false;
+                    return false;
+                }
+                else if (personal_info.toLowerCase().includes(password_array[0].toLowerCase())) {
+                    $('#password_check').show();
+                    $('#password_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password should not be similar to you <br>&nbsp;&nbsp;&nbsp;&nbsp; personal information.");
                     $('#password_check').focus();
                     $('#password_check').css("color", "#ce4f48");
                     password_err = false;
