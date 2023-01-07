@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- jQuery  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
-    integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -107,21 +107,6 @@
     #container input:focus {
         border-bottom: 2px solid #16a085;
     }
-
-    .signup_link{
-        margin: 13px 0;
-        text-align: center;
-        font-size: 16px;
-        color: #ffffff;
-        
-    }
-    .signup_link a{
-        color: #16a085;
-        text-decoration: none;
-    }
-    .signup_link a:hover{
-        color: #5A6EA5;
-    }
 </style>
 
 
@@ -154,7 +139,8 @@
                         <a class="nav-link" href="/"><button type="button" class="btn btn-dark">My Blogs</button></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/"><button type="button" class="btn btn-dark">Write</button></a>
+                        <a class="nav-link active" aria-current="page" href="/"><b><button type="button"
+                                    class="btn btn-success">Write</button></b></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/"><button type="button" class="btn btn-dark">About</button></a>
@@ -177,121 +163,7 @@
 
 
     <!--Login Form -->
-    <br>
-    <center>
-        <div id="container">
-            <br>
-            <form>
-                <i class="fas fa-user-circle"></i>
-                <h2>Login</h2>
-                <br>
-                <br>
-                <input type="email" id="email" name="email" aria-describedby="email" placeholder="Email" readonly
-                onfocus="this.removeAttribute('readonly');">
-                <h6 align="left" id="email_check"></h6>
-                <br>
-                <input type="password" id="login_password" name="login_password" placeholder="Password" readonly
-                onfocus="this.removeAttribute('readonly');">
-                <h6 align="left" id="login_password_check"></h6>
-                <br>
-                <button id="loginsubmitbtn" type="submit" onclick="login_info()">Login</button>
-            </form>
-           
-        </div>
-        <div class="signup_link">
-            Not a member? <a href="{% url 'main:register'%}">Sign up</a>
-        </div>
-    </center>
 
-
-    <script>
-        window.addEventListener('mousedown', function () {
-
-            console.log('hello');
-        });
-
-        $(document).ready(function () {
-            $('#email_check').hide();
-            $('#login_password_check').hide();
-
-
-            var email_err = true;
-            var login_password_err = true;
-
-
-            $('#email').keyup(function () {
-                email_check();
-            })
-            $('#login_password').keyup(function () {
-                login_password_check();
-            })
-            
-
-
-            function email_check() {
-                var email_value = $('#email').val();
-                if (email_value.length == '') {
-                    $('#email_check').show();
-                    $('#email_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your email name.");
-                    $('#email_check').focus();
-                    $('#email_check').css("color", "#ce4f48");
-                    $('#email_check').css("align", "left");
-                    email_err = false;
-                    return false;
-                }
-                else {
-                    $('#email_check').hide();
-                }
-            }
-            function login_password_check() {
-                var login_password_value = $('#login_password').val();
-                if (login_password_value.length == '') {
-                    $('#login_password_check').show();
-                    $('#login_password_check').html("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your password.");
-                    $('#login_password_check').focus();
-                    $('#login_password_check').css("color", "#ce4f48");
-                    login_password_err = false;
-                    return false;
-                }
-                else {
-                    $('#login_password_check').hide();
-                }
-            }
-        
-
-            $('#loginsubmitbtn').click(function () {
-                email_err = true;
-                login_password_err = true;
-
-                email_check();
-                login_password_check();
-                
-                if ((email_err == true) && (login_password_err == true)) {
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            });
-
-        });
-
-
-        // for login Data 
-        function login_info(){
-
-            var email_form_value = document.getElementById("email").value;
-            var login_password_form_value = document.getElementById("login_password").value;
-            // console.log("email_value,login_password_value");
-            console.log(email_form_value,login_form_password_value);
-
-            
-        }
-                    // console.log(exam_time);
-
-
-
-    </script>
 
     <!-- Optional JavaScript; choose one of the two! -->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
