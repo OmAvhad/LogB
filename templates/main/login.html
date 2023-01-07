@@ -151,10 +151,10 @@
                         <a class="nav-link" href="/"><button type="button" class="btn btn-dark">Home</button></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/"><button type="button" class="btn btn-dark">Blog</button></a>
+                        <a class="nav-link" href="/"><button type="button" class="btn btn-dark">My Blogs</button></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/"><button type="button" class="btn btn-dark">My Blogs</button></a>
+                        <a class="nav-link" href="/"><button type="button" class="btn btn-dark">Write</button></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/"><button type="button" class="btn btn-dark">About</button></a>
@@ -181,7 +181,7 @@
     <center>
         <div id="container">
             <br>
-            <form action="/" method="post">
+            <form>
                 <i class="fas fa-user-circle"></i>
                 <h2>Login</h2>
                 <br>
@@ -194,8 +194,7 @@
                 onfocus="this.removeAttribute('readonly');">
                 <h6 align="left" id="login_password_check"></h6>
                 <br>
-                <button id="loginsubmitbtn" type="submit">Login</button>
-
+                <button id="loginsubmitbtn" type="submit" onclick="login_info()">Login</button>
             </form>
            
         </div>
@@ -276,6 +275,20 @@
             });
 
         });
+
+
+        // for login Data 
+        function login_info(){
+
+            var email_form_value = document.getElementById("email").value;
+            var login_password_form_value = document.getElementById("login_password").value;
+            // console.log("email_value,login_password_value");
+            console.log(email_form_value,login_form_password_value);
+
+            
+        }
+                    // console.log(exam_time);
+
 
 
     </script>
