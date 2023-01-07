@@ -5,6 +5,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Text Editor  -->
+    <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+
     <!-- jQuery  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
         integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
@@ -26,86 +30,7 @@
     body {
         padding: 0px;
         margin: 0px;
-        background-color: #ecf0f1;
-    }
-
-    #container {
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        height: 480px;
-        width: 25%;
-        /* margin: 60px auto; */
-
-    }
-
-
-    #container form {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        /* justify-content: center; */
-        flex-wrap: wrap;
-        text-align: center;
-        height: 100%;
-        /* width: 350%; */
-        left: 0;
-        top: 0;
-        bottom: 0;
-    }
-
-    #container form :first-child {
-        font-size: 100px;
-        color: #16a085;
-        align-items: center;
-    }
-
-    #container form :nth-child(2) {
-        font-size: 24px;
-        color: #fff;
-    }
-
-    #container input {
-        border: 0px solid;
-        outline-width: 0px;
-        width: 300px;
-        height: 40px;
-        margin-left: 26px;
-        font-size: 18px;
-        font-weight: 600;
-        background-color: #34495e;
-        color: #fff;
-        padding-left: 10px;
-        border-bottom: 2px solid transparent;
-        transition: all .3s ease;
-    }
-
-    ::placeholder {
-        font-size: 18px;
-        color: #bdc3c7;
-    }
-
-    #container button {
-        border: 0px;
-        width: 300px;
-        height: 40px;
-        margin-left: 26px;
-        font-size: 18px;
-        font-weight: 600;
-        background-color: #16a085;
-        color: #fff;
-        cursor: pointer;
-        transition: all .3s ease;
-    }
-
-    /*Hover effect*/
-
-    #container button:hover {
-        background-color: #ce4f48;
-    }
-
-    #container input:focus {
-        border-bottom: 2px solid #16a085;
+        background-color: dark;
     }
 </style>
 
@@ -155,11 +80,21 @@
     </nav>
 
 
+    <div class="card">
+        <div class="card-body">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Blog Title</span>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              </div>
+            <textarea id="article_content" cols="8" rows="5" placeholder="Write the content of your blog."></textarea>
+            <script>
+                CKEDITOR.replace('article_content');
+            </script>
+        
+        </div>
+      </div>
 
-
-    <!-- alerts -->
-
-
+    
 
 
     <!--Login Form -->
