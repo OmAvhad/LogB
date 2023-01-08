@@ -216,7 +216,7 @@
                     onfocus="this.removeAttribute('readonly');">
                 <h6 align="left" id="cpassword_check"></h6>
                 <br>
-                <button id="submitbtn" type="submit">Register</button>
+                <button id="submitbtn" type="submit" onclick="registration_info()">Register</button>
             
             </form>
             
@@ -461,6 +461,18 @@
         });
 
 
+
+// Get values of inputs 
+
+        function registration_info(){
+
+var registration_first_name_value = document.getElementById("first_name").value;
+var registration_last_name_value = document.getElementById("last_name").value;
+var registration_username_value = document.getElementById("username").value;
+var registration_email_value = document.getElementById("email").value;
+var registration_password_value = document.getElementById("password").value;
+
+}
 
     </script>
 

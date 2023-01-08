@@ -85,12 +85,13 @@
             <div class="card-body">
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-default">Blog Title</span>
-                    <input type="text" class="form-control" id="blog_write_title" name="blog_write_title" placeholder="For eg: Blockchain Technology" aria-label="Sizing example input"
+                    <input type="text" class="form-control" id="write_title" name="write_title"
+                        placeholder="For eg: Blockchain Technology" aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-default" required>
                     <button class="btn btn-outline-success" type="submit"
                         id="a-addon2">&nbsp;&nbsp;&nbsp;&nbsp;POST&nbsp;&nbsp;&nbsp;&nbsp; </button>
                 </div>
-                <textarea id="article_content" cols="16" rows="5"
+                <textarea id="write_content" name="write_content" cols="16" rows="5"
                     placeholder="Write the content of your blog."></textarea>
                 <script>
                     CKEDITOR.replace('article_content');
@@ -105,7 +106,13 @@
 
     </form>
 
+    <script>
+        function write_info(){
 
+            var write_title_value = document.getElementById("write_title").value;
+            var write_content_value = document.getElementById("write_content").value;
+        }
+    </script>
 
     <!--Login Form -->
 
