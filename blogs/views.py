@@ -95,3 +95,24 @@ def getAllCategories(request):
         cat = Categories.objects.all()
         data = serializeCategories(cat)
         return JsonResponse(Response(status="success",status_code=200,data=data))
+    
+    
+def getCategoryBlogs(request):
+    if request.method == "POST":
+        postdata = request.POST
+        if "cat_id" in postdata:
+            blogs = Blogs.objects.filter(category_id =postdata["cat_id"])
+            if blogs.count() > 0:
+                data = serializeBlogs(blogs)
+                status = 'successful'
+                status_code = 200
+                message = "Blogs found successfully."
+            else:
+                status = 'successful'
+                status_code = 200
+                message = "No blogs posted under this category."
+        else:
+            status = 'failed'
+            status_code = 400
+            message = "Send required details"
+        return JsonResponse(Response(status=status,status_code=status_code,data=data,message=message))
