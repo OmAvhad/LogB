@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.contrib.auth.models import User
 from django.db.models import Q
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password,check_password
 
 # Create your views here.
@@ -16,6 +16,19 @@ def login_template(request,template_name="main/login.html"):
 def register_template(request,template_name="main/register.html"):
     
     return render(request,template_name)
+
+def logout_url(request):
+    if request.method == "POST":
+        try:
+            logout(request)
+            status="successful"
+            status_code = 200
+            message = "Logout Successful"
+        except:
+            status="failed"
+            status_code = 400
+            message = "Some error occured"
+        return JsonResponse(Response(status=status,status_code=status_code,message=message))
 
 @csrf_protect
 # @csrf_exempt
