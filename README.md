@@ -3,9 +3,14 @@
 
 LogB is a blogging website.
 
+## 👇 Prerequisites
 
+Before installation, please make sure you have already installed the following tools:
 
-## Installation
+- [Git](https://git-scm.com/downloads)
+- [Python](https://www.python.org/downloads/release/python-3916/)
+
+## 🛠️Installation
 
 1. Clone Logb
 
