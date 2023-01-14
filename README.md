@@ -66,3 +66,7 @@ Before installation, please make sure you have already installed the following t
   python manage.py makemigrations
   python manage.py migrate
   ```
+
+## 🙏 Support
+
+This project needs a ⭐️ from you. Don't forget to leave a star ⭐️.
