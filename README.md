@@ -14,55 +14,55 @@ Before installation, please make sure you have already installed the following t
 
 1. Clone Logb
 
-```bash
-  git clone https://github.com/OmAvhad/LogB
-```
+  ```bash
+    git clone https://github.com/OmAvhad/LogB
+  ```
     
 2. Move into the project
-```bash
-  cd my-project/
-```
+  ```bash
+    cd my-project/
+  ```
 
 3. Create environment and activate it.
-```bash
-  # install environment package
-  pip install virtualenv
+  ```bash
+    # install environment package
+    pip install virtualenv
 
-  # create environment
-  virtualenv virtualenv_name
+    # create environment
+    virtualenv virtualenv_name
 
-  # activate virtual environment
-  # Windows
-  venv\Scripts\activate
-  # Linux
-  source venv/bin/activate
-  # Mac os
-  source venv/bin/activate
-```
+    # activate virtual environment
+    # Windows
+    venv\Scripts\activate
+    # Linux
+    source venv/bin/activate
+    # Mac os
+    source venv/bin/activate
+  ```
 
 4. Install packages.
-```bash
-pip install requirements.txt
-```
+  ```bash
+  pip install requirements.txt
+  ```
 
 5. To connect to PostgresSQL database create .env file inside project directory and add the below variables in it.
-```python
-DB_NAME= db_name
-DB_USER= db_username
-DB_PASSWORD= db_password
-DB_HOST= db_host
-DB_PORT= db_port
-```
+  ```python
+  DB_NAME= db_name
+  DB_USER= db_username
+  DB_PASSWORD= db_password
+  DB_HOST= db_host
+  DB_PORT= db_port
+  ```
 
 6. Run Django app.
-```bash
-# runserver
-python manage.py runserver
-```
+  ```bash
+  # runserver
+  python manage.py runserver
+  ```
 
 7. Apply database migrations
-```bash
-# migrate changes
-python manage.py makemigrations
-python manage.py migrate
-```
+  ```bash
+  # migrate changes
+  python manage.py makemigrations
+  python manage.py migrate
+  ```
