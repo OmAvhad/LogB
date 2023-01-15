@@ -44,7 +44,7 @@ Before installation, please make sure you have already installed the following t
 
 4. Install packages.
   ```bash
-  pip install requirements.txt
+  pip install -r requirements.txt
   ```
 
 5. To connect to PostgresSQL database create .env file inside project directory and add the below variables in it.
