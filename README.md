@@ -9,6 +9,8 @@ Before installation, please make sure you have already installed the following t
 
 - [Git](https://git-scm.com/downloads)
 - [Python](https://www.python.org/downloads/release/python-3916/)
+- [PostgreSQL](https://www.postgresql.org/download/)
+
 
 ## 🛠️Installation
 
