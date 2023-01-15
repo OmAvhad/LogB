@@ -30,8 +30,8 @@ def logout_url(request):
             message = "Some error occured"
         return JsonResponse(Response(status=status,status_code=status_code,message=message))
 
-@csrf_protect
-# @csrf_exempt
+# @csrf_protect
+@csrf_exempt
 def login_api(request):
     if request.method == "POST":
         postdata = request.POST
@@ -52,8 +52,8 @@ def login_api(request):
             message = 'User not found'
     return JsonResponse(Response(status=status,status_code=status_code,message=message))
 
-@csrf_protect
-# @csrf_exempt
+# @csrf_protect
+@csrf_exempt
 def register_api(request):
     if request.method == "POST":
         postdata = request.POST
