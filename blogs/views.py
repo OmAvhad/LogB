@@ -11,6 +11,11 @@ from rest_framework.response import Response
 from rest_framework import status
 # Create your views here.
 
+def create_blog_template(request,template_name="blogs/write_blog.html"):
+    return render(request,template_name)
+
+def myblogs_template(request,template_name="blogs/myblogs.html"):
+    return render(request,template_name)
 
 @csrf_exempt
 @api_view(['GET'])
