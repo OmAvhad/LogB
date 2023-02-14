@@ -2,71 +2,65 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from .models import Blogs, Categories, Comments, Likes
 from django.http import JsonResponse
-from main.views import Response
 from django.contrib.auth.models import User
 from .operations import validateBlogCreation, serializeBlogs, userExists, blogExists, serializeCategories
 from datetime import datetime
+from .serializers import BlogsSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
 # Create your views here.
 
+def create_blog_template(request,template_name="blogs/write_blog.html"):
+    return render(request,template_name)
 
-# create blog
-# publish blog
-# list blogs
+def myblogs_template(request,template_name="blogs/myblogs.html"):
+    return render(request,template_name)
+
 @csrf_exempt
+@api_view(['GET'])
 def getBlogs(request):
-    if request.method == "GET":
-        blogs = Blogs.objects.all()
-        if blogs.count() > 0:
-            data = serializeBlogs(blogs)
-            status='succesfull'
-            status_code=200
-        else:
-            status='failed'
-            status_code=400
-        return JsonResponse(Response(status=status,status_code=status_code,data=data))
+    blogs = Blogs.objects.all().order_by('-id')
+    response = BlogsSerializer(blogs, many=True)
+    return Response({"message": "Blogs Fetched Successfully", "data":response.data},status=status.HTTP_200_OK)
 
 
 @csrf_exempt
+@api_view(['POST'])
 def getMyBlogs(request):
-    status='failed'
-    status_code=400
-    data = []
-    message = ''
-    if request.method == "POST":
-        postdata = request.POST
-        if "author_id" in postdata:
-            if userExists(postdata['author_id']):
-                blogs = Blogs.objects.filter(author_id=postdata['author_id'])
-                if blogs.count() > 0:
-                    data = serializeBlogs(blogs)
-                    status = 'succesfull'
-                    status_code = 200
-                    message = "Blogs Feteched Successfully"
-            else:
-                message = "User not found"   
+    postdata = request.POST
+    if "author_id" in postdata:
+        if userExists(postdata['author_id']):
+            blogs = Blogs.objects.filter(author_id=postdata['author_id'])
+            if blogs.count() > 0:
+                response = BlogsSerializer(blogs, many=True)
+                status_code = status.HTTP_200_OK
+                message = "Blogs Feteched Successfully"
         else:
-            message = "Send required details"     
-    return JsonResponse(Response(status=status,status_code=status_code,message=message,data=data))
+            status_code = status.HTTP_404_NOT_FOUND
+            message = "User not found"   
+    else:
+        status_code = status.HTTP_400_BAD_REQUEST
+        message = "Send required details"     
+    return Response({"message": message, "data":response.data},status=status_code)
     
     
 @csrf_exempt
+@api_view(['POST'])
 def createBlog(request):
-    status = "failed"
-    status_code = 400
-    if request.method == "POST":
-        val = validateBlogCreation(request.POST)
-        if val['bool']:
-            postdata = request.POST
-            if userExists(postdata['author_id']):
-                Blogs.objects.create(title=postdata['title'],author_id=postdata['author_id'],content=postdata['content'])
-                status = "successfull"
-                status_code = 200
-                message = "Blog created Successfully"
-            else:
-                message = "User not found"
+    postdata = request.POST
+    if userExists(postdata['author']):
+        serialzer = BlogsSerializer(data=postdata)
+        if serialzer.is_valid():
+            serialzer.save()
+            status_code = status.HTTP_201_CREATED
+            message = "Blog created Successfully"
         else:
-            message = val['message']
-        return JsonResponse(Response(status=status,status_code=status_code,message=message))
+            print(serialzer.errors)
+    else:
+        status_code = status.HTTP_401_UNAUTHORIZED
+        message = "User not found"
+    return Response({"message": message},status=status_code)
     
 
 @csrf_exempt

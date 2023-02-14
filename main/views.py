@@ -13,8 +13,10 @@ def home(request,template_name="main/home.html"):
 def login_template(request,template_name="main/login.html"):
     return render(request,template_name)
 
+def about_template(request,template_name="main/about.html"):
+    return render(request,template_name)
+
 def register_template(request,template_name="main/register.html"):
-    
     return render(request,template_name)
 
 def logout_url(request):
