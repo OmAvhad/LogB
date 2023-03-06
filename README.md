@@ -1,5 +1,5 @@
 <div align="center">
-  <h1> SavePlate </h1>
+  <h1> LgB </h1>
   <h3> A Blogging Website. </h3>
   Built with ❤️
 </div>
