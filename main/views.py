@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password,check_password
-
 # Create your views here.
 def home(request,template_name="main/home.html"):
     return render(request,template_name)
@@ -100,6 +99,8 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login
 from .serializers import UserSerializer
 from django.contrib.auth.hashers import make_password
+from . import models
+
 @csrf_exempt
 def register(request):
     postdata = request.POST
@@ -135,3 +136,26 @@ def signin(request):
     else:
         return JsonResponse({"message": "user not found"}, status=status.HTTP_400_BAD_REQUEST)
         
+@csrf_exempt
+def user_pregnancy_info(request):
+    if request.method == "POST":
+        weight = request.POST['weight']
+        height = request.POST['height']
+        weeks_pregnant = request.POST['weeks_pregnant']
+        user = request.POST['user_id']
+        if weight and height and weeks_pregnant and user:
+            models.UserPregnancyInfo.objects.create(user_id=user,weight=weight,height=height,weeks_pregnant=weeks_pregnant)
+            return JsonResponse({"message": "User Pregnancy Info Added"})
+        else:
+            return JsonResponse({"message": "User Pregnancy Info Not Added"})
+        
+@csrf_exempt
+def user_mood(request):
+    if request.method == "POST":
+        mood = request.POST['mood']
+        user = request.POST['user_id']
+        if mood and user:
+            models.UserMood.objects.create(user_id=user,mood=mood)
+            return JsonResponse({"message": "User Mood Added"})
+        else:
+            return JsonResponse({"message": "User Mood Not Added"})
