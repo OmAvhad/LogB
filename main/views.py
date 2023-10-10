@@ -97,7 +97,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth import authenticate, login
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserMoodSerializer, UserPregnancyInfoSerializer
 from django.contrib.auth.hashers import make_password
 from . import models
 
@@ -159,3 +159,15 @@ def user_mood(request):
             return JsonResponse({"message": "User Mood Added"})
         else:
             return JsonResponse({"message": "User Mood Not Added"})
+        
+@csrf_exempt
+def user_data(request):
+    user_id = request.GET.get('user_id')
+    print(user_id)
+    if user_id:
+        user = User.objects.get(id=user_id)
+        user_pregnancy_info = models.UserPregnancyInfo.objects.get(user_id=user_id)
+        user_mood = models.UserMood.objects.filter(user_id=user_id).order_by('-date')
+        return JsonResponse({"user": UserSerializer(user).data,"user_pregnancy_info":UserPregnancyInfoSerializer(user_pregnancy_info).data,"user_mood":UserMoodSerializer(user_mood, many=True).data})
+    else:
+        return JsonResponse({"message": "User Not Found"})

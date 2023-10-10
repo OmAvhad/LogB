@@ -11,5 +11,6 @@ urlpatterns = [
     path('api/signin/',views.signin,name="signin"),
     path('api/signup/',views.register,name="signup"),
     path('api/pregnancy-info/', views.user_pregnancy_info, name="pregnancy-info"),
-    path('api/mood/', views.user_mood, name="mood")
+    path('api/mood/', views.user_mood, name="mood"),
+    path('api/user-data/', views.user_data, name="user-info"),
 ]
