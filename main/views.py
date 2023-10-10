@@ -88,3 +88,50 @@ def register_api(request):
 def Response(status,status_code,data={},message = "",):
     response = {'status':status,'status_code':status_code,'data':data,'message':message}
     return response
+
+from .serializers import UserSerializer
+from django.http import JsonResponse
+from rest_framework.response import Response
+from rest_framework import status, serializers
+from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
+from django.db.models import Q
+from django.contrib.auth import authenticate, login
+from .serializers import UserSerializer
+from django.contrib.auth.hashers import make_password
+@csrf_exempt
+def register(request):
+    postdata = request.POST
+    try:
+        user = User.objects.filter(Q(username=postdata['email']) | Q(email=postdata['email'])).count()
+    except:
+        user = None
+    if not user:
+        user = User.objects.create(username=postdata['email'],password=make_password(postdata['password']),email=postdata['email'],first_name=postdata['name'])
+        login(request,user)
+        return JsonResponse({"user": UserSerializer(user).data}	)
+    else:
+        return JsonResponse({"message": "Email already Exists."}, status=status.HTTP_400_BAD_REQUEST)
+    
+# Login API
+@csrf_exempt
+def signin(request):
+    postdata = request.POST
+    email = postdata['email']
+    password = postdata['password']
+    try:
+        user = User.objects.get(username=postdata['email'])
+    except:
+        user = None
+    print(user,email,password)
+    if user and email and password:
+        user = authenticate(username=email, password=password)
+        if user:
+            login(request,user)
+            return JsonResponse({"user": UserSerializer(user).data})
+        else:
+            return JsonResponse({"message": "Invalid Credentials"}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return JsonResponse({"message": "user not found"}, status=status.HTTP_400_BAD_REQUEST)
+        
